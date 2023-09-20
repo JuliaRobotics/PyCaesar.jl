@@ -1,0 +1,7 @@
+[project]
+name = "PyCaesar"
+version = "0.1.0"
+# ...
+dependencies = [
+    "opencv-python >= 4.8",
+]
