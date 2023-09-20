@@ -4,6 +4,19 @@
 |--------|-----|----------|------|
 | [![version][pycjl-ver-img]][pycjl-releases] | [![CI][pycjl-ci-dev-img]][pycjl-ci-dev-url] | [![codecov.io][pycjl-cov-img]][pycjl-cov-url] | [![docs][cjl-docs-img]][cjl-docs-url] <br> [![][caesar-slack-badge]][caesar-slack] |
 
+## Dependencies
+
+The following packages should be available in the Python environment used by PyCall.jl
+
+```
+rospy
+opencv # i.e. cv2
+open3d
+rosbags
+```
+
+> 23Q3: We had issues in using Conda.jl to install these dependecies in a new environment, specifically conda package compliance with newer versions of Python.  E.g. open3d was not available via conda on Python 3.10 at the time of writing.  Please open an issue if further clarification is needed.
+
 ## Introduction
 
 Caesar.jl extensions using Python.  See common [Caesar.jl][cjl-docs-url] Docs for details.

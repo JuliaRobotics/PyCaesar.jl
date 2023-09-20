@@ -19,7 +19,16 @@ jobs:
         os: [ubuntu-latest]
         arch: [x64]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+      - run: pip install opencv-python
+      - uses: ros-tooling/setup-ros@0.7
+        with:
+          required-ros-distributions: noetic
+      - run: "source /opt/ros/noetic/setup.bash"
       - uses: julia-actions/setup-julia@v1
         with:
           version: ${{ matrix.julia-version }}
