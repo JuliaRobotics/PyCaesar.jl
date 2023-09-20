@@ -1,0 +1,32 @@
+name = "PyCaesar"
+uuid = "5de271da-f4c9-48db-ba43-272b66d09ab8"
+authors = ["dehann <dehann@navability.io>"]
+desc = "Python extensions relating to Caesar.jl"
+version = "0.1.0"
+
+[deps]
+Caesar = "62eebf14-49bc-5f46-9df9-f7b7ef379406"
+Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
+DocStringExtensions = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
+Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
+PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
+Unmarshal = "cbff2730-442d-58d7-89d1-8e530c41eb02"
+UUIDs = "cf7118a7-6976-5b1a-9a39-7adc72f591a4"
+
+[weakdeps]
+RobotOS = "22415677-39a4-5241-a37a-00beabbbdae8"
+
+[extensions]
+PyCaesarRobotOSExt = "RobotOS"
+
+[compat]
+Caesar = "0.15, 0.16"
+PyCall = "1"
+RobotOS = "0.7"
+julia = "1.9"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["RobotOS", "Test"]
