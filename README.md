@@ -10,9 +10,9 @@ The following packages should be available in the Python environment used by PyC
 
 ```
 rospy
-opencv # i.e. cv2
+opencv-python # i.e. cv2
 open3d
-rosbags
+Rosbags
 ```
 
 > 23Q3: We had issues in using Conda.jl to install these dependecies in a new environment, specifically conda package compliance with newer versions of Python.  E.g. open3d was not available via conda on Python 3.10 at the time of writing.  Please open an issue if further clarification is needed.
