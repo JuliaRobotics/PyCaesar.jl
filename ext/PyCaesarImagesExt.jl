@@ -11,12 +11,11 @@ using TensorCast
 using SHA: sha256
 
 import PyCaesar: calcFlow, getPose, goodFeaturesToTrack, goodFeaturesToTrackORB, combinePlot
-import PyCaesar: trackFeaturesFrames, trackFeaturesForwardsBackwards, makeBlobFeatureTracksPerImage_FwdBck!, makeORBParams, plotBlobsImageTracks!
-import PyCaesar: whatcv
+import PyCaesar: trackFeaturesFrames, trackFeaturesForwardsBackwards
+import PyCaesar: makeBlobFeatureTracksPerImage_FwdBck!, makeORBParams
 
 export calcFlow, getPose, goodFeaturesToTrack, goodFeaturesToTrackORB, combinePlot
-export trackFeaturesFrames, trackFeaturesForwardsBackwards, makeBlobFeatureTracksPerImage_FwdBck!, makeORBParams, plotBlobsImageTracks!
-
+export trackFeaturesFrames, trackFeaturesForwardsBackwards, makeBlobFeatureTracksPerImage_FwdBck!, makeORBParams
 
 const np = PyNULL()
 const cv = PyNULL()
