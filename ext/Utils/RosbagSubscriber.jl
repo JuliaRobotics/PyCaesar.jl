@@ -17,13 +17,13 @@ writeRosbagPy = pyimport("rosbagWriter")
 
 ```julia
 # Link with ROSbag infrastructure via rospy
-using Pkg
-ENV["PYTHON"] = "/usr/bin/python3"
-Pkg.build("PyCall")
-using PyCall
+# using Pkg
+# ENV["PYTHON"] = "/usr/bin/python3"
+# Pkg.build("PyCall")
+# using PyCall
 using RobotOS
 @rosimport std_msgs.msg: String
-rostypegen()
+rostypegen(Main) # default defintion dump into Main
 using Caesar
 
 bagwr = Caesar.RosbagWriter("/tmp/test.bag")

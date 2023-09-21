@@ -7,17 +7,24 @@ version = "0.1.0"
 [deps]
 Caesar = "62eebf14-49bc-5f46-9df9-f7b7ef379406"
 Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
+DistributedFactorGraphs = "b5cc3c7e-6572-11e9-2517-99fb8daf2f04"
 DocStringExtensions = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
+JSON3 = "0f8b85d8-7281-11e9-16c2-39a750bddbf1"
 Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
+ProgressMeter = "92933f4c-e287-5a05-a399-4b506db050ca"
 PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
+SHA = "ea8e919c-243c-51af-8825-aaa63cd721ce"
+TensorCast = "02d47bb6-7ce6-556a-be16-bb1710789e2b"
 UUIDs = "cf7118a7-6976-5b1a-9a39-7adc72f591a4"
 Unmarshal = "cbff2730-442d-58d7-89d1-8e530c41eb02"
 
 [weakdeps]
 RobotOS = "22415677-39a4-5241-a37a-00beabbbdae8"
+Images = "916415d5-f1e6-5110-898d-aaa5f9f070e0"
 
 [extensions]
 PyCaesarRobotOSExt = "RobotOS"
+PyCaesarImagesExt = "Images"
 
 [compat]
 Caesar = "0.15, 0.16"
@@ -29,6 +36,7 @@ julia = "1.9"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+TestImages = "5e47fb64-e119-507b-a336-dd2b206d9990"
 
 [targets]
-test = ["RobotOS", "Test"]
+test = ["RobotOS", "Test", "TestImages"]
