@@ -1,10 +1,29 @@
 module PyCaesarRobotOSExt
 
 using PyCall
+using OpenSSL # workaround attempt, https://github.com/JuliaWeb/OpenSSL.jl/issues/9
 using RobotOS
 using Caesar
 using Dates
 using DocStringExtensions
+
+
+
+## FIXME DEPS
+using Colors
+using ImageMagick, FileIO
+using Images
+# likely packages needed to ingest various different sensor data types and serialize them for NVA
+using TimeZones
+using Random
+using JSON
+using BSON, Serialization
+using FixedPointNumbers
+using StaticArrays
+
+
+
+
 
 import Base: convert
 
@@ -16,6 +35,11 @@ import Caesar._PCL as _PCL
 # weakdeps type and memver prototype import for overwritten definition pattern 
 import PyCaesar: RosbagSubscriber, RosbagWriter
 import PyCaesar: loop!, getROSPyMsgTimestamp, nanosecond2datetime
+
+
+
+##
+
 
 
 
@@ -51,5 +75,6 @@ rostypegen(@__MODULE__)
 include("Utils/RosbagSubscriber.jl")
 include("services/ROSConversions.jl")
 include("services/PCLROSConversions.jl")
+include("services/IngestROSSetup.jl")
 
 end
