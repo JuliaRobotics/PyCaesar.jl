@@ -3,14 +3,6 @@
 
 include("StdROSHandlers/ROSJSONtoJSON.jl")
 
-
-
-wPC  = Caesar._PCL.PointCloud()
-wPC2 = Caesar._PCL.PCLPointCloud2(wPC)
-rmsg = Caesar._PCL.toROSPointCloud2(wPC2);
-@info "In-situ test complete of tricky ROS and _PCL loading."
-##
-
 # http://wiki.ros.org/laser_geometry
 lg = pyimport("laser_geometry.laser_geometry")
 

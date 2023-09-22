@@ -1,35 +1,5 @@
 
-# did not debug errors when trying to move these unmarshal functions upstream
-# standard types
-# @rosimport sensor_msgs.msg: CompressedImage
-@rosimport tf2_msgs.msg: TFMessage
 
-@rosimport nav_msgs.msg: Odometry
-
-@rosimport sensor_msgs.msg: PointCloud2
-@rosimport sensor_msgs.msg: LaserScan
-@rosimport sensor_msgs.msg: Image
-@rosimport sensor_msgs.msg: Imu
-@rosimport sensor_msgs.msg: NavSatFix
-@rosimport sensor_msgs.msg: RegionOfInterest
-@rosimport sensor_msgs.msg: CameraInfo
-
-@rosimport geometry_msgs.msg: TransformStamped
-@rosimport geometry_msgs.msg: Transform
-@rosimport geometry_msgs.msg: Vector3
-@rosimport geometry_msgs.msg: Quaternion
-@rosimport geometry_msgs.msg: Pose
-@rosimport geometry_msgs.msg: Point
-@rosimport geometry_msgs.msg: Vector3
-@rosimport geometry_msgs.msg: Twist
-@rosimport geometry_msgs.msg: TwistWithCovariance
-@rosimport geometry_msgs.msg: TwistWithCovarianceStamped
-
-# do not load Caesar until after rostypegen
-rostypegen()
-
-# dont load Caesar until after rostypegen
-import Caesar: unmarshal
 
 ##
 
@@ -63,14 +33,14 @@ ROS_MSG_LOOKUP_DICT = Dict(
 
 ##
 
-function unmarshal(msg::Main.tf2_msgs.msg.TFMessage)
+function unmarshal(msg::tf2_msgs.msg.TFMessage)
   Dict{String,Any}(
     "transforms" => unmarshal.(msg.transforms),
     "_type" => "ROS1/tf2_msgs/TFMessage"
   )
 end
 
-function unmarshal(msg::Main.nav_msgs.msg.Odometry)
+function unmarshal(msg::nav_msgs.msg.Odometry)
   # http://docs.ros.org/en/api/nav_msgs/html/msg/Odometry.html
   Dict{String,Any}(
     "header" => Caesar.unmarshal(msg.header),
@@ -83,7 +53,7 @@ end
 
 ## ==================
 
-function unmarshal(msg::Main.sensor_msgs.msg.RegionOfInterest)
+function unmarshal(msg::sensor_msgs.msg.RegionOfInterest)
   Dict{String,Any}(
     "x_offset" => msg.x_offset,
     "y_offset" => msg.y_offset,
@@ -95,7 +65,7 @@ function unmarshal(msg::Main.sensor_msgs.msg.RegionOfInterest)
 end
 
 
-function unmarshal(msg::Main.sensor_msgs.msg.CameraInfo)
+function unmarshal(msg::sensor_msgs.msg.CameraInfo)
   # https://docs.ros.org/en/jade/api/sensor_msgs/html/msg/CameraInfo.html
   Dict{String,Any}(
     "header" => unmarshal(msg.header),
@@ -113,7 +83,7 @@ function unmarshal(msg::Main.sensor_msgs.msg.CameraInfo)
   )
 end
 
-function unmarshal(msg::Main.sensor_msgs.msg.Imu)
+function unmarshal(msg::sensor_msgs.msg.Imu)
   Dict{String,Any}(
     "header" => unmarshal(msg.header),
     "orientation" => msg.orientation,
@@ -128,7 +98,7 @@ function unmarshal(msg::Main.sensor_msgs.msg.Imu)
   )
 end
 
-function unmarshal(msg::Main.sensor_msgs.msg.NavSatFix)
+function unmarshal(msg::sensor_msgs.msg.NavSatFix)
   # http://docs.ros.org/en/api/nav_msgs/html/msg/Odometry.html
   Dict{String,Any}(
     "header" => unmarshal(msg.header),
@@ -150,7 +120,7 @@ end
 ## =============
 
 
-function unmarshal(msg::Main.geometry_msgs.msg.Quaternion)
+function unmarshal(msg::geometry_msgs.msg.Quaternion)
   Dict{String,Any}(
     "x" => msg.x,
     "y" => msg.y,
@@ -159,14 +129,14 @@ function unmarshal(msg::Main.geometry_msgs.msg.Quaternion)
     "_type" => "ROS1/geometry_msgs/Quaternion"
   )
 end
-function unmarshal(msg::Main.geometry_msgs.msg.Transform)
+function unmarshal(msg::geometry_msgs.msg.Transform)
   Dict{String,Any}(
     "translation" => unmarshal(msg.translation),
     "rotation" => unmarshal(msg.rotation),
     "_type" => "ROS1/geometry_msgs/Transform",
   )
 end
-function unmarshal(msg::Main.geometry_msgs.msg.TransformStamped)
+function unmarshal(msg::geometry_msgs.msg.TransformStamped)
   Dict{String,Any}(
     "header" => Caesar.unmarshal(msg.header),
     "child_frame_id" => msg.child_frame_id,
@@ -175,7 +145,7 @@ function unmarshal(msg::Main.geometry_msgs.msg.TransformStamped)
   )
 end
 
-function unmarshal(msg::Main.geometry_msgs.msg.Vector3)
+function unmarshal(msg::geometry_msgs.msg.Vector3)
   Dict{String,Any}(
     "x" => msg.x,
     "y" => msg.y,
@@ -184,7 +154,7 @@ function unmarshal(msg::Main.geometry_msgs.msg.Vector3)
   )
 end
 
-function unmarshal(msg::Main.geometry_msgs.msg.Point)
+function unmarshal(msg::geometry_msgs.msg.Point)
   # http://docs.ros.org/en/api/geometry_msgs/html/msg/Point.html
   Dict{String,Any}(
     "x" => msg.x,
@@ -194,7 +164,7 @@ function unmarshal(msg::Main.geometry_msgs.msg.Point)
   )
 end
 
-function unmarshal(msg::Main.geometry_msgs.msg.Pose)
+function unmarshal(msg::geometry_msgs.msg.Pose)
   Dict{String,Any}(
     "position" => unmarshal(msg.position),
     "orientation" => unmarshal(msg.orientation),
@@ -202,7 +172,7 @@ function unmarshal(msg::Main.geometry_msgs.msg.Pose)
   )
 end
 
-function unmarshal(msg::Main.geometry_msgs.msg.Twist)
+function unmarshal(msg::geometry_msgs.msg.Twist)
   # http://docs.ros.org/en/api/geometry_msgs/html/msg/Twist.html
   Dict{String,Any}(
     "linear" => unmarshal(msg.linear),
@@ -211,7 +181,7 @@ function unmarshal(msg::Main.geometry_msgs.msg.Twist)
   )
 end
 
-function unmarshal(msg::Main.geometry_msgs.msg.TwistWithCovariance)
+function unmarshal(msg::geometry_msgs.msg.TwistWithCovariance)
     # http://docs.ros.org/en/api/geometry_msgs/html/msg/TwistWithCovariance.html
     Dict{String,Any}(
       "twist" => unmarshal(msg.twist),
@@ -220,7 +190,7 @@ function unmarshal(msg::Main.geometry_msgs.msg.TwistWithCovariance)
   )
 end
 
-function unmarshal(msg::Main.geometry_msgs.msg.TwistWithCovarianceStamped)
+function unmarshal(msg::geometry_msgs.msg.TwistWithCovarianceStamped)
   Dict{String,Any}(
     "header" => Caesar.unmarshal(msg.header),
     "twist" => unmarshal(msg.twist),
@@ -228,7 +198,7 @@ function unmarshal(msg::Main.geometry_msgs.msg.TwistWithCovarianceStamped)
   )
 end
 
-function unmarshal(msg::Main.geometry_msgs.msg.PoseWithCovariance)
+function unmarshal(msg::geometry_msgs.msg.PoseWithCovariance)
   # http://docs.ros.org/en/api/geometry_msgs/html/msg/PoseWithCovariance.html
   Dict{String,Any}(
     "pose" => unmarshal(msg.pose),
