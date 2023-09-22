@@ -13,6 +13,8 @@ function makeBlobFeatureTracksPerImage_FwdBck! end
 function makeORBParams end
 
 # RobotOS.jl
+function handleMsg! end
+function handleMsg_OVRLPRECOMP! end
 function loop! end
 function getROSPyMsgTimestamp end
 function nanosecond2datetime end
