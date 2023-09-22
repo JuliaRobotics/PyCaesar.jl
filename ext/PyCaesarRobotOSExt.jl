@@ -20,19 +20,21 @@ using StaticArrays
 
 # dont load Caesar until after rostypegen
 using Caesar
-# import Caesar: unmarshal
+
+import Base: convert
 
 # FIXME DEPRECATE UPGRADE TBD
 import Unmarshal: unmarshal
+# import Caesar: unmarshal
 
 import Caesar._PCL as _PCL
-
-import Base: convert
+import Caesar: toImage
 
 # weakdeps type and memver prototype import for overwritten definition pattern 
 import PyCaesar: RosbagSubscriber, RosbagWriter
 import PyCaesar: loop!, getROSPyMsgTimestamp, nanosecond2datetime
 import PyCaesar: handleMsg!, handleMsg_OVRLPRECOMP!
+import PyCaesar: toImage, toROSImage
 
 ##
 
