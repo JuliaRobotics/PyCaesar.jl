@@ -29,6 +29,7 @@ PyCaesarRobotOSExt = "RobotOS"
 [compat]
 Caesar = "0.15, 0.16"
 DocStringExtensions = "0.9"
+ProgressMeter = "1"
 JSON3 = "1"
 PyCall = "1"
 RobotOS = "0.7"
