@@ -25,6 +25,8 @@ jobs:
           # Noetic Ninjemys (May 2020 - May 2025)
           - docker_image: rostooling/setup-ros-docker:ubuntu-focal-ros-noetic-ros-base-latest
             ros_distribution: noetic
+    container:
+      image: ${{ matrix.docker_image }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v4
@@ -38,7 +40,11 @@ jobs:
       # - run: "source /opt/ros/noetic/setup.bash"
       # docker pull osrf/ros:noetic-desktop
       - name: Check Rosversion
-        run: rosversion -d
+        uses: ./
+          id: action-ros-ci
+          with:
+            target-ros1-distro: ${{ matrix.ros_distribution }}
+          run: rosversion -d
       - uses: julia-actions/setup-julia@v1
         with:
           version: ${{ matrix.julia-version }}
