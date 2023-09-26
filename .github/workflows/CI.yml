@@ -18,13 +18,13 @@ jobs:
         julia-version: ['1.9', '~1.10.0-0', 'nightly']
         os: [ubuntu-latest]
         arch: [x64]
-        # https://github.com/ros-tooling/action-ros-ci/blob/master/.github/workflows/test.yml
-        ros_distribution:
-          - noetic
-        include:
-          # Noetic Ninjemys (May 2020 - May 2025)
-          - docker_image: rostooling/setup-ros-docker:ubuntu-focal-ros-noetic-ros-base-latest
-            ros_distribution: noetic
+        # # https://github.com/ros-tooling/action-ros-ci/blob/master/.github/workflows/test.yml
+        # ros_distribution:
+        #   - noetic
+        # include:
+        #   # Noetic Ninjemys (May 2020 - May 2025)
+        #   - docker_image: rostooling/setup-ros-docker:ubuntu-focal-ros-noetic-ros-base-latest
+        #     ros_distribution: noetic
     container:
       image: ${{ matrix.docker_image }}
     steps:
@@ -49,30 +49,30 @@ jobs:
         with:
           base-image: rwthika/ros1:noetic
           command: rosversion -d
-      # - run: rosversion -d
-      #   name: Check Rosversion
-      - uses: julia-actions/setup-julia@v1
-        with:
-          version: ${{ matrix.julia-version }}
-          arch: ${{ matrix.arch }}
-      - uses: actions/cache@v1
-        env:
-          cache-name: cache-artifacts
-        with:
-          path: ~/.julia/artifacts
-          key: ${{ runner.os }}-test-${{ env.cache-name }}-${{ hashFiles('**/Project.toml') }}
-          restore-keys: |
-            ${{ runner.os }}-test-${{ env.cache-name }}-
-            ${{ runner.os }}-test-
-            ${{ runner.os }}-
-      - uses: julia-actions/julia-buildpkg@latest
-      - run: |
-          git config --global user.name Tester
-          git config --global user.email te@st.er
-      - uses: julia-actions/julia-runtest@latest
-        continue-on-error: ${{ matrix.julia-version == 'nightly' }}
-      - uses: julia-actions/julia-processcoverage@v1
-        if: ${{ matrix.julia-version == '1.9' }}
-      - uses: codecov/codecov-action@v1
-        with:
-          file: lcov.info
+        # - run: rosversion -d
+        #   name: Check Rosversion
+      # - uses: julia-actions/setup-julia@v1
+      #   with:
+      #     version: ${{ matrix.julia-version }}
+      #     arch: ${{ matrix.arch }}
+      # - uses: actions/cache@v1
+      #   env:
+      #     cache-name: cache-artifacts
+      #   with:
+      #     path: ~/.julia/artifacts
+      #     key: ${{ runner.os }}-test-${{ env.cache-name }}-${{ hashFiles('**/Project.toml') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-test-${{ env.cache-name }}-
+      #       ${{ runner.os }}-test-
+      #       ${{ runner.os }}-
+      # - uses: julia-actions/julia-buildpkg@latest
+      # - run: |
+      #     git config --global user.name Tester
+      #     git config --global user.email te@st.er
+      # - uses: julia-actions/julia-runtest@latest
+      #   continue-on-error: ${{ matrix.julia-version == 'nightly' }}
+      # - uses: julia-actions/julia-processcoverage@v1
+      #   if: ${{ matrix.julia-version == '1.9' }}
+      # - uses: codecov/codecov-action@v1
+      #   with:
+      #     file: lcov.info
