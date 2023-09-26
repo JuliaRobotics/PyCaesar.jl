@@ -39,12 +39,12 @@ jobs:
       #     required-ros-distributions: noetic
       # - run: "source /opt/ros/noetic/setup.bash"
       # docker pull osrf/ros:noetic-desktop
-      - name: Check Rosversion
-        uses: ./
+      - uses: ./
         id: action-ros-ci
         with:
           target-ros1-distro: ${{ matrix.ros_distribution }}
-        run: rosversion -d
+      - run: rosversion -d
+        name: Check Rosversion
       - uses: julia-actions/setup-julia@v1
         with:
           version: ${{ matrix.julia-version }}
