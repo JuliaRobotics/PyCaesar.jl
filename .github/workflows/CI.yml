@@ -29,6 +29,8 @@ jobs:
       image: ${{ matrix.docker_image }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          lfs: true
       - uses: actions/setup-python@v4
         # with:
         #   python-version: '3.9'
