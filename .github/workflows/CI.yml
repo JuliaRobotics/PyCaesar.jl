@@ -40,15 +40,19 @@ jobs:
         with:
           version: ${{ matrix.julia-version }}
           arch: ${{ matrix.arch }}
+      - uses: ros-tooling/setup-ros@v0.6
+        with:
+          required-ros-distributions: noetic
       - name: Check Rosversion
         run: |
-          sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-          sudo apt install curl # if you haven't already installed curl
-          curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
-          sudo apt update
-          sudo apt install ros-noetic-ros-base
+          echo "loading ros variables"
           source /opt/ros/noetic/setup.bash
           rosversion -d
+        # sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+        # sudo apt install curl # if you haven't already installed curl
+        # curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+        # sudo apt update
+        # sudo apt install ros-noetic-ros-base
         # - uses: ros-tooling/setup-ros@v0.7
         #   with:
         #     required-ros-distributions: noetic
