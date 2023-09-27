@@ -29,13 +29,13 @@ jobs:
     #   image: ${{ matrix.docker_image }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          lfs: true
+        # with:
+        #   lfs: true
       - uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-          cache: 'pip'
-        - run: pip install opencv-python
+        #   cache: 'pip'
+        # - run: pip install opencv-python
       - uses: julia-actions/setup-julia@v1
         with:
           version: ${{ matrix.julia-version }}
