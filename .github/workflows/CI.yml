@@ -42,7 +42,7 @@ jobs:
           arch: ${{ matrix.arch }}
       - uses: ros-tooling/setup-ros@v0.6
         with:
-          required-ros-distributions: noetic
+          required-ros-distributions: noetic-ros-core
       - name: Check Rosversion
         run: |
           echo "loading ros variables"
