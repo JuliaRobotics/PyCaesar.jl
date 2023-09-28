@@ -41,8 +41,8 @@ jobs:
           version: ${{ matrix.julia-version }}
           arch: ${{ matrix.arch }}
       - uses: ros-tooling/setup-ros@v0.7
-        with:
-          required-ros-distributions: noetic
+        # with:
+        #   required-ros-distributions: noetic
       - name: Check Rosversion
         run: |
           echo "loading ros variables"
