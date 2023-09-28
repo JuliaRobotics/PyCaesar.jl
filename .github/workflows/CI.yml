@@ -46,6 +46,7 @@ jobs:
       - name: Check Rosversion
         run: |
           echo "loading ros variables"
+          ls /opt/ros
           source /opt/ros/noetic/setup.bash
           rosversion -d
         # sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
