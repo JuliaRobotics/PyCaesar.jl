@@ -36,6 +36,7 @@ jobs:
         #   required-ros-distributions: noetic humble
       - name: Check Rosversion
         run: |
+          ls /opt/ros
           source /opt/ros/noetic/setup.bash && rosnode --help
           rosversion -d
       - name: Git global config
