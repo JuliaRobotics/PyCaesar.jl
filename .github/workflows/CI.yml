@@ -32,10 +32,12 @@ jobs:
           version: ${{ matrix.julia-version }}
           arch: ${{ matrix.arch }}
       - uses: ros-tooling/setup-ros@v0.7
-        # with:
-        #   required-ros-distributions: noetic
+        with:
+          required-ros-distributions: noetic humble
       - name: Check Rosversion
-        run: rosversion -d
+        run: |
+          source /opt/ros/noetic/setup.bash && rosnode --help
+          rosversion -d
       - name: Git global config
         run: |
           git config --global user.name Tester
