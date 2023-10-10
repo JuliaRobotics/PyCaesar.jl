@@ -34,11 +34,12 @@ jobs:
       - uses: ros-tooling/setup-ros@v0.7
         # with:
         #   required-ros-distributions: noetic humble
-      - name: Check Rosversion
-        run: |
-          ls /opt/ros
-          source /opt/ros/noetic/setup.bash && rosnode --help
-          rosversion -d
+      # - name: Check Rosversion
+      #   run: |
+      #     ls /opt/ros
+      # no such file or dir
+      #     source /opt/ros/noetic/setup.bash && rosnode --help
+      #     rosversion -d
       - name: Git global config
         run: |
           git config --global user.name Tester
