@@ -44,14 +44,16 @@ jobs:
         run: |
           git config --global user.name Tester
           git config --global user.email te@st.er
-      - uses: julia-actions/julia-buildpkg@latest
-      - uses: julia-actions/julia-runtest@latest
+      - name: "Julia Pkg build as necessary"
+        uses: julia-actions/julia-buildpkg@latest
+      - name: "Run Julia tests"
+        uses: julia-actions/julia-runtest@latest
         continue-on-error: ${{ matrix.julia-version == 'nightly' }}
-      # - uses: julia-actions/julia-processcoverage@v1
-      #   if: ${{ matrix.julia-version == '1.9' }}
-      # - uses: codecov/codecov-action@v1
-      #   with:
-      #     file: lcov.info
+      - uses: julia-actions/julia-processcoverage@v1
+        if: ${{ matrix.julia-version == '1.9' }}
+      - uses: codecov/codecov-action@v1
+        with:
+          file: lcov.info
 
 
 
