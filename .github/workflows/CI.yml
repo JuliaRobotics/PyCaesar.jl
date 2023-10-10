@@ -18,47 +18,85 @@ jobs:
         julia-version: ['1.9', '~1.10.0-0', 'nightly']
         os: [ubuntu-latest]
         arch: [x64]
-        # https://github.com/ros-tooling/action-ros-ci/blob/master/.github/workflows/test.yml
-        ros_distribution:
-          - noetic
-        include:
-          # Noetic Ninjemys (May 2020 - May 2025)
-          - docker_image: rostooling/setup-ros-docker:ubuntu-focal-ros-noetic-ros-base-latest
-            ros_distribution: noetic
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
         # with:
-        #   python-version: '3.9'
-        #   cache: 'pip'
-      # - run: pip install opencv-python
-      # - uses: ros-tooling/setup-ros@v0.7
-      #   with:
-      #     required-ros-distributions: noetic
-      # - run: "source /opt/ros/noetic/setup.bash"
-      # docker pull osrf/ros:noetic-desktop
+        #   lfs: true
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+      - name: Installing pip packages
+        run: |
+          pip install pip --upgrade
+          pip install numpy
+          pip install opencv-python
       - uses: julia-actions/setup-julia@v1
         with:
           version: ${{ matrix.julia-version }}
           arch: ${{ matrix.arch }}
-      - uses: actions/cache@v1
-        env:
-          cache-name: cache-artifacts
-        with:
-          path: ~/.julia/artifacts
-          key: ${{ runner.os }}-test-${{ env.cache-name }}-${{ hashFiles('**/Project.toml') }}
-          restore-keys: |
-            ${{ runner.os }}-test-${{ env.cache-name }}-
-            ${{ runner.os }}-test-
-            ${{ runner.os }}-
-      - uses: julia-actions/julia-buildpkg@latest
-      - run: |
+      - uses: ros-tooling/setup-ros@v0.7
+        # with:
+        #   required-ros-distributions: noetic humble
+      # - name: Check Rosversion
+      #   run: |
+      #     ls /opt/ros
+      # no such file or dir
+      #     source /opt/ros/noetic/setup.bash && rosnode --help
+      #     rosversion -d
+      - name: Git global config
+        run: |
           git config --global user.name Tester
           git config --global user.email te@st.er
-      - uses: julia-actions/julia-runtest@latest
+      - name: "Julia Pkg build as necessary"
+        uses: julia-actions/julia-buildpkg@latest
+      - name: "Run Julia tests"
+        uses: julia-actions/julia-runtest@latest
         continue-on-error: ${{ matrix.julia-version == 'nightly' }}
       - uses: julia-actions/julia-processcoverage@v1
         if: ${{ matrix.julia-version == '1.9' }}
       - uses: codecov/codecov-action@v1
         with:
           file: lcov.info
+
+
+
+# ==============================================
+# tried by could not get to work
+      # matrix
+        # # https://github.com/ros-tooling/action-ros-ci/blob/master/.github/workflows/test.yml
+        # ros_distribution:
+        #   - noetic
+        # include:
+        #   # Noetic Ninjemys (May 2020 - May 2025)
+        #   - docker_image: rostooling/setup-ros-docker:ubuntu-focal-ros-noetic-ros-base-latest
+        #     ros_distribution: noetic
+    # container:
+    #   image: ${{ matrix.docker_image }}
+
+      # source /opt/ros/noetic/setup.bash
+      # sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+      # sudo apt install curl # if you haven't already installed curl
+      # curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+      # sudo apt update
+      # sudo apt install ros-noetic-ros-base
+      # docker pull osrf/ros:noetic-desktop
+      # - uses: ./
+      #   id: action-ros-ci
+      #   with:
+      #     target-ros1-distro: ${{ matrix.ros_distribution }}
+      # - uses: ika-rwth-aachen/docker-ros@v1.2.5
+      #   with:
+      #     base-image: rwthika/ros1:noetic
+      #     command: rosversion -d
+      # - uses: actions/cache@v1
+      #   env:
+      #     cache-name: cache-artifacts
+      #   with:
+      #     path: ~/.julia/artifacts
+      #     key: ${{ runner.os }}-test-${{ env.cache-name }}-${{ hashFiles('**/Project.toml') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-test-${{ env.cache-name }}-
+      #       ${{ runner.os }}-test-
+      #       ${{ runner.os }}-
+    # ----------------
