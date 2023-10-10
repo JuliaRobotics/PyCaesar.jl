@@ -25,12 +25,12 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-      - name: Installing Numpy
+          cache: 'pip'
+      - name: Installing pip packages
         run: |
           pip install pip --upgrade
           pip install numpy
-        #   cache: 'pip'
-        # - run: pip install opencv-python
+          pip install opencv-python
       - uses: julia-actions/setup-julia@v1
         with:
           version: ${{ matrix.julia-version }}
