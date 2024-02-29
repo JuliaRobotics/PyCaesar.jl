@@ -19,9 +19,11 @@ import PyCaesar: pycv
 import PyCaesar: getPoseEssential, getPoseFundamental
 import PyCaesar: getPose # deprecating
 import PyCaesar: getPoseSIFT # deprecating
+import PyCaesar: undistortImage
 
 export calcFlow, getPoseEssential, goodFeaturesToTrack, goodFeaturesToTrackORB, combinePlot
 export trackFeaturesFrames, trackFeaturesForwardsBackwards, makeBlobFeatureTracksPerImage_FwdBck!, makeORBParams
+export undistortImage
 
 pyutilpath = joinpath(@__DIR__, "Utils")
 pushfirst!(PyVector(pyimport("sys")."path"), pyutilpath )
@@ -49,7 +51,7 @@ pyssc = SscPy."ssc"
 
 
 include("services/OpenCVFeatures.jl")
-
+include("services/OpenCVUndistort.jl")
 
 # deprecation
 @deprecate getPose(p1, p2, K) getPoseEssential(p1, p2, K)

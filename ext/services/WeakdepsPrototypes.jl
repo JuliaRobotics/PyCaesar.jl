@@ -16,6 +16,8 @@ function makeBlobFeatureTracksPerImage_FwdBck! end
 function makeORBParams end
 function pycv end
 
+function undistortImage end
+
 # RobotOS.jl
 function handleMsg! end
 function handleMsg_OVRLPRECOMP! end
