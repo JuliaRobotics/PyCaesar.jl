@@ -13,6 +13,11 @@ using UUIDs
 # weakdeps exports
 export RosbagWriter, RosbagSubscriber
 
+export calcFlow, getPose, goodFeaturesToTrack, goodFeaturesToTrackORB, combinePlot
+export trackFeaturesFrames, trackFeaturesForwardsBackwards, makeBlobFeatureTracksPerImage_FwdBck!, makeORBParams
+
+export undistortImage
+
 """
     version
 
